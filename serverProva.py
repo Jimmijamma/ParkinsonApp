@@ -9,6 +9,8 @@ from flask import request
 import json
 import os
 from urllib import URLopener
+from threading import Thread
+import processSignal as ps
 
 app = Flask(__name__)
 
@@ -37,6 +39,9 @@ def process():
     if request.method == 'POST':
         data = request.data
         filePath = receiveRequest(data) 
+        
+        process_thread=Thread(target=ps.processSignal(), args=[filePath])
+        process_thread.start()
         
         return '200'
     else:
