@@ -3,11 +3,12 @@ Created on 06 apr 2017
 
 @author: jimmijamma
 '''
-from signalProcessing import RPDE
+from signalProcessing import rpde,dfa
 from scipy.io import wavfile
 from scipy.signal import decimate
 from numpy import mean
 from math import floor
+
 
 def pre_processing(filePath):
     
@@ -25,6 +26,7 @@ def pre_processing(filePath):
     m_y=mean(abs(y))
     y=y-m_y
     
+    # down-sampling the signal
     downsampling_factor = 5
     y=decimate(y, downsampling_factor)
     fs = int(1.0 * fs / downsampling_factor)
@@ -37,5 +39,9 @@ def processSignal(filePath):
     mono_data = pre_processing(filePath)
     
     print "Computing RPDE ..."
-    rpde = RPDE.RPDE_main(mono_data)
-    print "RPDE: " + str(rpde)
+    RPDE = rpde.rpde_main(mono_data)
+    print "RPDE: " + str(RPDE)
+    
+    print "Computing DFA ..."
+    DFA = dfa.dfa_main(mono_data)
+    print "DFA: " + str(DFA)

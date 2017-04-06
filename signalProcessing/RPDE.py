@@ -1,8 +1,11 @@
 '''
 Created on 06 apr 2017
 
+Edited Python version of close returns code by M. Little (c) 2006 
+
 @author: jimmijamma
 '''
+
 from numpy import sum,log
 
 
@@ -14,7 +17,7 @@ def logz(x):
     return y
 
 
-def RPDE_main(mono_data):
+def rpde_main(mono_data):
     
     m=4
     tau=35
