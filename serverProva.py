@@ -40,7 +40,7 @@ def process():
         data = request.data
         filePath = receiveRequest(data) 
         
-        process_thread=Thread(target=ps.processSignal(), args=[filePath])
+        process_thread=Thread(target=ps.processSignal, args=[filePath])
         process_thread.start()
         
         return '200'
