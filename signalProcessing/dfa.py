@@ -4,6 +4,10 @@
 Created on Thu Mar 16 15:42:40 2017
 
 @author: jimmijamma
+Detrended Fluctuation Analysis
+Python traduction of Matlab code: version 1.1 by Guan Wenye 
+(https://it.mathworks.com/matlabcentral/fileexchange/19795-detrended-fluctuation-analysis)
+
 """
 
 import numpy as np

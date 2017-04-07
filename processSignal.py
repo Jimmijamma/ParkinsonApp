@@ -3,7 +3,7 @@ Created on 06 apr 2017
 
 @author: jimmijamma
 '''
-from signalProcessing import rpde,dfa
+from signalProcessing import rpde,dfa,hnr
 from scipy.io import wavfile
 from scipy.signal import decimate
 from numpy import mean
@@ -45,3 +45,7 @@ def processSignal(filePath):
     print "Computing DFA ..."
     DFA = dfa.dfa_main(mono_data)
     print "DFA: " + str(DFA)
+    
+    print "Computing HNR ..."
+    HNR = hnr.hnr_main(filePath)
+    print "HNR: " + str(HNR)
