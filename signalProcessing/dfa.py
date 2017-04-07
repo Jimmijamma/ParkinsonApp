@@ -32,7 +32,7 @@ def dfa_main(data):
     aprox_f=np.polyfit(log_ts,log_f,1)
     alpha=aprox_f[0] # slope of the aproximating function of the log-log function
     
-    DFA=1/(1+np.exp(-alpha));
+    DFA=1/(1+np.exp(-alpha))
     
     return DFA
     

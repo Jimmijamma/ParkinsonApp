@@ -11,6 +11,7 @@ import os
 from urllib import URLopener
 from threading import Thread
 import processSignal as ps
+from parkinson_neural_network import neuralnet_main
 
 app = Flask(__name__)
 
@@ -40,8 +41,12 @@ def process():
         data = request.data
         filePath = receiveRequest(data) 
         
-        process_thread=Thread(target=ps.processSignal, args=[filePath])
-        process_thread.start()
+        #HNR,RPDE,DFA,PPE=ps.processSignal(filePath)
+        #row=[HNR,RPDE,DFA,PPE]
+        row=[0.079633,-0.234945,-0.144857,-0.643293]
+        status=neuralnet_main(row)
+           
+        print"Status of the patient: " + str(status)
         
         return '200'
     else:
