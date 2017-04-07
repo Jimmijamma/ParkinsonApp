@@ -15,8 +15,7 @@ from parkinson_neural_network import neuralnet_main
 
 app = Flask(__name__)
 
-def receiveRequest(data):
-    
+def receiveRequest(data):   
     j = json.loads(data)
     audio_url = j["audio_url"]
     codicePaziente = j["codicePaziente"]
@@ -32,14 +31,37 @@ def receiveRequest(data):
     testfile = URLopener()
     testfile.retrieve(audio_url, filePath)
     
-    return filePath
+    return filePath, j
+
+def writeResponse(row,status,jsonRequest):
+    HNR=row[0]
+    RPDE=row[1]
+    DFA=row[2]
+    PPE=row[3]
+    codicePaziente = jsonRequest["codicePaziente"]
+    audio_position = jsonRequest["audio_position"]
+    codiceMedico = jsonRequest["codiceMedico"]
+    codiceTest = jsonRequest["codiceTest"]
+    dataTest = jsonRequest["dataTest"]
     
+    data = { "audio_position":audio_position,
+        "codicePaziente": codicePaziente,
+        "codiceMedico":codiceMedico,
+        "codiceTest": codiceTest,
+        "dataTest": dataTest,
+        "HNR":HNR,
+        "RPDE":RPDE,
+        "DFA":DFA,
+        "PPE":PPE,
+        "UPDRS":status}
+    
+    return data
 
 @app.route('/process', methods= ['GET', 'POST'])
 def process():
     if request.method == 'POST':
         data = request.data
-        filePath = receiveRequest(data) 
+        filePath, jsonRequest = receiveRequest(data) 
         
         #HNR,RPDE,DFA,PPE=ps.processSignal(filePath)
         #row=[HNR,RPDE,DFA,PPE]
@@ -47,8 +69,9 @@ def process():
         status=neuralnet_main(row)
            
         print"Status of the patient: " + str(status)
-        
-        return '200'
+        jsonResponse=writeResponse(row, status, jsonRequest)
+        response = app.response_class(response=json.dumps(jsonResponse),status=200,mimetype='application/json')     
+        return response
     else:
         return 'Upload Page'
 
