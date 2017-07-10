@@ -7,7 +7,8 @@ Edited Python version of close returns code by M. Little (c) 2006
 '''
 
 from numpy import sum,log
-
+import matlab.engine
+import scipy.io as sio
 
 def logz(x):
     if (x > 0):
@@ -22,13 +23,15 @@ def rpde_main(mono_data):
     m=4
     tau=35
     epsilon=0.12
-
+    
+    '''
     res = close_ret(mono_data, m, tau, epsilon)
     
     res = list(res)
     s = sum(res)
     rpd = []
     for element in res:
+        print res
         rpd.append(1.0*element/s)
   
     N = len(rpd)
@@ -38,7 +41,14 @@ def rpde_main(mono_data):
         H = H - rpd[j] * logz(rpd[j])
 
     H_norm = 1.0*H/log(N)
+    '''
+    x=mono_data.tolist()
+    sio.savemat('input.mat', {'input':x})
+    print x
+    eng = matlab.engine.start_matlab()
+    H_norm,rpd = eng.rpde(x,m,tau,nargout=2)
 
+    
     return H_norm
 
 

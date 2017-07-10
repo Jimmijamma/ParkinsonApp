@@ -31,7 +31,10 @@ def ppe_main(filePath):
     tmpFile = praat.calculateF0(filePath,readProgress,acFreqMin,voicingThreshold,veryAccurate,fMax,octaveJumpCost,silenceThreshold,octaveCost,voicedUnvoicedCost,verbose)
     offsets, f0_list = praat.readPitchTier(tmpFile)
     f0_list=list(f0_list)
-    f0_list = [x for x in f0_list if x is not None]
+    for idx, item in enumerate(f0_list):
+        if item is None:
+            item=0
+            f0_list[idx]=item
     mean_f0 = mean(f0_list)
     r=[]
     for f0 in f0_list:

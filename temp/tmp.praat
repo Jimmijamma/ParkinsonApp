@@ -1,4 +1,4 @@
-Read from file... /Users/jimmijamma/Documents/workspace/Parkinson/temp/ALEMORI1993MC_001_20-03-2017.wav
-To Pitch (ac)...  0.01 60 15 no 0.03 0.45 0.01 0.35 0.14 2000
-Down to PitchTier
-Write to short text file... /Users/jimmijamma/Documents/workspace/Parkinson/temp/ALEMORI1993MC_001_20-03-2017.PitchTier
+Read from file... /Users/jimmijamma/Documents/workspace/Parkinson/temp/crKNd8qr8EaTWgp2lIXRdMw8xTH2_ssss_12231.wav
+do ("To Harmonicity (ac)...", 0.010000, 60.000000, 0.100000, 4.500000)
+Write to short text file... /Users/jimmijamma/Documents/workspace/Parkinson/temp/crKNd8qr8EaTWgp2lIXRdMw8xTH2_ssss_12231.Harmonicity
+Remove All

@@ -8,12 +8,13 @@ import requests
 import json
 
 
-post_url = "http://127.0.0.1:5000/process"
+post_url = "http://127.0.0.1:5000/"
 
-audio_url = "https://firebasestorage.googleapis.com/v0/b/parkinsonapp-7b987.appspot.com/o/Pazienti%2F1_03.wav?alt=media&token=2be99d72-5a56-4c25-9e67-665d0a4aa8e1"
-audio_position = "gs://parkinsonapp-7b987.appspot.com/Pazienti/1_03.wav"
+
+audio_url = "https://firebasestorage.googleapis.com/v0/b/parkinsonapp-7b987.appspot.com/o/audio%2FVrAXqFo56nRJVCXRuzXisyTNG4R2%2F2017_07_05_14_32_55.wav?alt=media&token=83062f74-81d9-45dd-bd3e-262f5b75ca98"
+audio_position = "gs://parkinsonapp-7b987.appspot.com/audio/VrAXqFo56nRJVCXRuzXisyTNG4R2/2017_07_05_14_32_55.wav"
 codiceMedico = "MAR.ROS"
-codicePaziente = "PGNGDO75A15D205T"
+codicePaziente = "CNJp4fLaRARNyZyJlUoXuH1PRqj2"
 codiceTest = "001"
 dataTest =  "20-03-2017"
 
@@ -26,8 +27,10 @@ data = { "audio_url": audio_url,
         "codiceTest": codiceTest,
         "dataTest": dataTest}
 
+
 response = requests.post(post_url, data=json.dumps(data), headers=headers)
 
+"""
 jsonResponse = response.json()
 
 audio_position=jsonResponse["audio_position"]
@@ -50,4 +53,4 @@ print "RPDE: " + str(RPDE)
 print "DFA: " + str(DFA)
 print "PPE: " + str(PPE)
 print "UPDRS: " + str(UPDRS)
-print "Posizione del file: " + str(audio_position)
+print "Posizione del file: " + str(audio_position)"""

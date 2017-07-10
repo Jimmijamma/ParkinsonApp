@@ -868,7 +868,7 @@ def calculateF0(
 	pitchTierFileName = inputPath + fileNameOnly + '.PitchTier'
 	f.write('Write to short text file... ' + pitchTierFileName + '\n')
 	f.close()
-	args = ['/Applications/Praat.app/Contents/MacOS/Praat', praatControlFileName]
+	args = ['/Applications/Praat.app/Contents/MacOS/Praat', '--run', praatControlFileName]
 	if verbose: print "\tcalling Praat to calculate F0"
 	msg = generalUtility.makeSystemCall(args)	
 	return pitchTierFileName
@@ -997,7 +997,7 @@ def calculateHNR(
 	f.write('Write to short text file... ' + outputFileName + '\n')
 	f.write('Remove All\n')
 	f.close()
-	args = ['/Applications/Praat.app/Contents/MacOS/Praat', praatControlFileName]
+	args = ['/Applications/Praat.app/Contents/MacOS/Praat','--run', praatControlFileName]
 	print "\calling Praat to calculate HNR"
 	msg = generalUtility.makeSystemCall(args)	
 	dataX, dataY = readHarmonicityData(outputFileName)

@@ -12,10 +12,12 @@ Python traduction of Matlab code: version 1.1 by Guan Wenye
 
 import numpy as np
 from math import log, floor
+import matlab.engine
+
 
 
 def dfa_main(data):
-    
+    '''
     time_scales=list(np.linspace(100,1000,10)) # array of possible time scales
     
     fluctuations=[] # vector of fluctuations in different time scales
@@ -31,6 +33,14 @@ def dfa_main(data):
         log_f.append(log(f))
     aprox_f=np.polyfit(log_ts,log_f,1)
     alpha=aprox_f[0] # slope of the aproximating function of the log-log function
+    '''
+    
+    x=data.tolist()
+    eng = matlab.engine.start_matlab()
+    ret = eng.fastdfa(x,nargout=3)
+    alpha=ret[0]
+    intervals = [item for sublist in ret[1] for item in sublist]
+    flucts = [item for sublist in ret[2] for item in sublist]
     
     DFA=1/(1+np.exp(-alpha))
     
